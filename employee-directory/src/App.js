@@ -7,16 +7,18 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
+import './App.css';
 
 
 // import Alert from "../components/Alert";
 
 class App extends Component {
+
   state = {
     search: "",
     employees: [{name: {first:"Test"}}],
-    results: [],
-    error: ""
+    results: []
+    
   };
 
   // When the component mounts, get a list of all available base breeds and update this.state.breeds
@@ -26,42 +28,49 @@ class App extends Component {
        .then(res => {
          
          this.setState({ employees: res.data.results, results: res.data.results });
+
+
          console.log(res.data.results[0]);
-      
+  
        })
        .catch(err => console.log(err));
   }
 
   handleInputChange = event => {
-    this.setState({ search: event.target.value });
+    this.setState({ search: event.target.value }); 
   };
 
 
   search = (event) => {
     
-    let searchTerm = event.target.value;
+    
+    let searchTerm = event.target.value.toLowerCase();
+
 
     let searchResults = [];
 
     for (var i = 0; i < this.state.employees.length; i++) {
       let employee = this.state.employees[i];
-      if (employee.name.includes(searchTerm)) {
+      if (employee.name.first.toLowerCase().includes(searchTerm) || employee.name.last.toLowerCase().includes(searchTerm)) {
         searchResults.push(employee);
       }
     }
 
+    console.log(`There are ${searchResults.length} results`);
+
     this.setState({ results: searchResults });
+    
 
   }
 
 //   This is where you render the components. Need to write each component that is rendered here. 
   render() {
     
-    console.log(this.state.employees.length);
+    //console.log(this.state.employees.length);
     return (
       
       <Container fluid>
-        <Jumbotron fluid controlId="jumboTron">
+        <Jumbotron fluid className="jumboTron">
           
             <h1>Employee Search App</h1>
             <p>
@@ -70,16 +79,21 @@ class App extends Component {
           
       </Jumbotron>
         <Row>
-          <Col> <h4> Search Employee</h4></Col>
+          <Col md={4}></Col>
+          <Col md={4}> <h4> Search Employee</h4></Col>
+          <Col md={4}></Col>
+
         </Row>
         <Row>
-          <Col>
+          <Col md={4}></Col>
+          <Col md={4}>
             <Form>
               <Form.Group controlId="search">
                 <Form.Control type="text" placeholder="" onChange={this.search}/>
               </Form.Group>
             </Form>
           </Col>
+          <Col md={4}></Col>
         </Row>
         <Row>
           <Col>

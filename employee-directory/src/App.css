@@ -2,10 +2,18 @@
   text-align: center;
 }
 
-#jumboTron {
-  background-color: blue;
+.jumboTron {
+  background-color: orange;
 }
 
+h1 {
+  color: white;
+  text-align: center;
+}
+
+h4 {
+  text-align: center;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
