@@ -55,11 +55,23 @@ class App extends Component {
 
 //   This is where you render the components. Need to write each component that is rendered here. 
   render() {
+    
     console.log(this.state.employees.length);
     return (
+      // <Jumbotron fluid>
+      //     <Container>
+      //       <h1>Fluid jumbotron</h1>
+      //       <p>
+      //         This is a modified jumbotron that occupies the entire horizontal space of
+      //         its parent.
+      //       </p>
+      //     </Container>
+      // </Jumbotron>
+      
+  
       <Container fluid>
         <Row>
-          <Col>Header</Col>
+          <Col> <h1> Employee Search App</h1></Col>
         </Row>
         <Row>
           <Col>
@@ -86,7 +98,9 @@ class App extends Component {
 
               {this.state.results.map((obj, i) => {
 
-                  return <EmployeeRow key={i} name={obj.name.first + " " + obj.name.last} phone={obj.phone}/>
+                  return <EmployeeRow key={i} picture={obj.picture.thumbnail} name={obj.name.first + " " + obj.name.last} phone={obj.phone} email={obj.email} dob={obj.dob.date}/>
+
+                  
 
               })}
             
