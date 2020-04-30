@@ -17,7 +17,8 @@ class App extends Component {
   state = {
     search: "",
     employees: [{name: {first:"Test"}}],
-    results: []
+    results: [],
+    sortOrder: -1
     
   };
 
@@ -40,6 +41,43 @@ class App extends Component {
     this.setState({ search: event.target.value }); 
   };
 
+  sortNames = () => {
+
+    let tempResultsArray = this.state.results;
+
+    if (this.state.sortOrder === 0) {
+
+      //Set the order to Reverse Alphabetical 1
+      tempResultsArray.sort((a, b) => {
+        if (b.name.first < a.name.first) {
+          return a;
+        } else {
+          return b;
+        }
+      });
+
+      this.setState({ sortOrder: 1, results: tempResultsArray });
+
+    } else {
+
+      //Set the order to Aplhabetical 0
+      
+
+      //Sort the results Alphabetically
+
+      tempResultsArray.sort((a, b) => {
+        if (a.name.first < b.name.first) {
+          return a;
+        } else {
+          return b;
+        }
+      });
+
+      this.setState({ sortOrder: 0, results: tempResultsArray });
+
+    }
+
+  }
 
   search = (event) => {
     
@@ -101,7 +139,7 @@ class App extends Component {
             <thead>
               <tr>
                 <th>Image</th>
-                <th>Name</th>
+                <th onClick={this.sortNames}>Name</th>
                 <th>Phone</th>
                 <th>Email</th>
                 <th>Dob</th>
